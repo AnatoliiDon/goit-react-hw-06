@@ -20,11 +20,11 @@ const App = () => {
     dispatch(action);
   };
 
-  // const onDeleteProfile = profileId => {
-  //   console.log(profileId);
-  //   const action = deleteContact(profileId);
-  //   dispatch(action);
-  // };
+  const onDeleteProfile = profileId => {
+    console.log(profileId);
+    const action = deleteContact(profileId);
+    dispatch(action);
+  };
 
   const filteredUsers = selectContacts.filter(user =>
     user.name
@@ -39,7 +39,7 @@ const App = () => {
       <SearchBox filter={selectNameFilter} />
       <ContactList
         contactInfo={filteredUsers}
-        // deleteProfile={onDeleteProfile}
+        deleteProfile={onDeleteProfile}
       />
     </div>
   );
