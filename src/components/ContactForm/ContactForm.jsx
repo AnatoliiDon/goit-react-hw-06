@@ -1,6 +1,9 @@
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import css from './ContactForm.module.css';
 import * as yup from 'yup';
+import { addContact } from '../../redux/contactsSlice';
+import { nanoid } from 'nanoid';
+import { useDispatch } from 'react-redux';
 const initialValues = {
   name: '',
   number: '',
@@ -23,15 +26,22 @@ const addProfileSchema = yup.object({
     .matches(regex, 'enter valid number'),
 });
 
-const ContactForm = ({ addProfile }) => {
-  const handleSubmit = (values, actions) => {
+const ContactForm = () => {
+  const dispatch = useDispatch();
+  const onAddProfile = (formData, actions) => {
     actions.resetForm();
-    addProfile(values);
+    const finalUser = {
+      ...formData,
+      id: nanoid(),
+    };
+    const action = addContact(finalUser);
+    dispatch(action);
   };
+
   return (
     <Formik
       initialValues={initialValues}
-      onSubmit={handleSubmit}
+      onSubmit={onAddProfile}
       validationSchema={addProfileSchema}
     >
       <Form className={css.formField}>
