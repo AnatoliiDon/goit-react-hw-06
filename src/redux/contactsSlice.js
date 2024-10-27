@@ -1,5 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 import ContactInfo from '../contactListInfo.json';
+
 const INITIAL_STATE = {
   contacts: { items: JSON.parse(localStorage.getItem('users')) || ContactInfo },
 };
@@ -10,13 +11,11 @@ export const contactsSlice = createSlice({
   reducers: {
     addContact: (state, action) => {
       state.contacts.items.push(action.payload);
-      localStorage.setItem('users', JSON.stringify(state.contacts.items));
     },
     deleteContact: (state, action) => {
       state.contacts.items = state.contacts.items.filter(
         user => user.id !== action.payload
       );
-      localStorage.setItem('users', JSON.stringify(state.contacts.items));
     },
   },
 });

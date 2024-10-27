@@ -8,7 +8,6 @@ const ContactList = () => {
   });
 
   const selectNameFilter = useSelector(state => state.filter.filters.name);
-  console.log(selectNameFilter);
   const filteredUsers = selectContacts.filter(user =>
     user.name
       .toLocaleLowerCase()
